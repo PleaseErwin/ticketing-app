@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { StyleSheet, View, Image, Keyboard } from 'react-native';
-import { Divider, Text, Button, Card } from 'react-native-paper';
+import { Text, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios';
 
-const TicketApplyPage = ({ route }) => {// uri: "http://3.37.125.95:3000" + route.params.ticket.imagePath
+const TicketApplyPage = ({ route }) => {
   const navigation = useNavigation();
 
   const [applyState, setApplyState] = React.useState(0);
@@ -67,17 +67,17 @@ const TicketApplyPage = ({ route }) => {// uri: "http://3.37.125.95:3000" + rout
   return (
     <View style={styles.container}>
       <View style={{ flex: 3 }}>
-        <Image source={require('./qr.png')} style={styles.imageStyle}></Image>
+        <Image source={{uri:`data:image/gif;base64,${route.params.ticket.imgEncode}`}} style={styles.imageStyle}></Image>
       </View>
       <View style={{ flex: 3, margin: 30 }}>
-        <Text variant="headlineLarge">공연정보</Text>
+        <Text variant="headlineSmall">공연정보</Text>
         <Text />
-        <Text variant="headlineSmall">- 공연일자 {route.params.ticket.showdate}</Text>
-        <Text variant="headlineSmall">- 공연시간 {route.params.ticket.showtime}</Text>
-        <Text variant="headlineSmall">- 공연장소 {route.params.ticket.place}</Text>
+        <Text variant="titleMedium">- 공연일자 {route.params.ticket.showdate}</Text>
+        <Text variant="titleMedium">- 공연시간 {route.params.ticket.showtime}</Text>
+        <Text variant="titleMedium">- 공연장소 {route.params.ticket.place}</Text>
       </View>
       <View style={{ flex: 1, marginLeft: 30 }}>
-        <Text variant="headlineSmall">{route.params.ticket.ticketPrice}</Text>
+        <Text style={{ textAlign: 'right', marginRight: 25 }} variant="titleLarge">{route.params.ticket.ticketPrice} ETH</Text>
       </View>
       <View style={{ flex: 1, alignItems: 'center' }}>
         {
