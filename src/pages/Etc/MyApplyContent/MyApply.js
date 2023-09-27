@@ -41,42 +41,35 @@ const MyApply = () => {
 
     let applyView = (applyList.length > 0 ? <FlatList data={applyList} renderItem={(itemData) => {
         return (
-            // <Card mode='outlined' style={styles.box} onPress={() => navigation.navigate('ShowApplyResult', { item: itemData.item })}>
-            //     <Card.Content style={{ margin: 10 }}>
-            //         <Text variant="titleLarge">{itemData.item.showname}</Text>
-            //         {/* <Text />
-            //         <View style={{ flexDirection: 'row' }}>
-            //             <Text variant="bodyLarge">{itemData.item.showtime}</Text>
-            //             <Text variant="bodyLarge" style={{ flex: 1, textAlign: 'right' }}>{itemData.item.ticketPrice} ETH</Text>
-            //         </View> */}
-            //     </Card.Content>
-            // </Card>
-
-            <TouchableOpacity onPress={() => navigation.navigate('ShowApplyResult', { item: itemData.item })}>
-                <View style={{ padding: 10, margin: 10, borderRadius: 10, backgroundColor: 'white' }}>
+            // <TouchableOpacity onPress={() => navigation.navigate('ShowApplyResult', { item: itemData.item })}>
+            //     <View style={{ padding: 10, margin: 10, borderRadius: 10, backgroundColor: 'white', borderBottomWidth: 3, borderColor: 'gainsboro' }}>
+            <Card contentStyle={{ backgroundColor: 'white', padding: 15, paddingBottom: 12 }} mode='elevated' style={styles.box} onPress={() => navigation.navigate('ShowApplyResult', { item: itemData.item })}>
+                {/* <Card.Content style={{ backgroundColor: 'white', padding: 0 }}> */}
                     <View style={{ flexDirection: 'row' }}>
                         <View>
                             <Image style={{ height: 70, width: 70 }} source={{ uri: `data:image/jpg;base64,${itemData.item.imgEncode}` }} />
                         </View>
-                        <View style={{ flex: 1, margin: 10, marginBottom: 0 }}>
+                        <View style={{ flex: 1, marginLeft: 13, marginBottom: 3 }}>
                             <View style={{ flex: 3 }}>
                                 <Text />
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                                <Text variant="bodyMedium">{itemData.item.showdate}</Text><Text variant="bodyMedium"> / A3</Text>
+                                <Text variant="bodyMedium">{itemData.item.showdate}</Text><Text variant="bodyMedium"> / A3석</Text>
                             </View>
                         </View>
                     </View>
-                    <Badge style={{ position: 'absolute', right: 10, top: 10, borderRadius: 3, paddingHorizontal: 5, backgroundColor: 'lightsteelblue' }}>추첨완료</Badge>
+                    <Badge style={{ position: 'absolute', right: 15, top: 15, borderRadius: 3, paddingHorizontal: 5, backgroundColor: 'lightsteelblue' }}>추첨완료</Badge>
                     <Text style={{ marginTop: 5 }} numberOfLines={1} variant="titleMedium">{itemData.item.showname}</Text>
-                </View>
-            </TouchableOpacity>
+                {/* </Card.Content> */}
+            </Card>
+            //     </View>
+            // </TouchableOpacity>
         );
     }} />
         : <View style={styles.container}><Text>응모 내역이 없습니다.</Text></View>)
 
     return (
-        <View style={{ flex: 1, margin: 10 }}>
+        <View style={{ flex: 1, margin: 20 }}>
             {loading ? <Loading /> : <View style={{ flex: 1 }}>
                 {applyView}
             </View>}
@@ -91,8 +84,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     box: {
-        alignContent: 'center',
-        marginVertical: 15
+        //alignContent: 'center',
+        marginBottom: 15
     }
 });
 
