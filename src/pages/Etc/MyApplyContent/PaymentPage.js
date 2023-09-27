@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, Keyboard, Image } from 'react-native';
-import { Text, List, Button, Divider } from 'react-native-paper';
+import { Text, Button, Divider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
@@ -54,45 +54,28 @@ const PaymentPage = ({ route }) => {
     }
 
     return (
-        // <View style={styles.container}>
-        //     <View style={{ flex: 1 }}></View>
-        //     <View style={{ flex: 5 }}>
-        //         <Card style={{ height: '50%', marginBottom: 10, justifyContent: 'center' }}>
-        //             <Card.Content>
-        //                 <Text style={{ textAlign: 'center', marginBottom: 10 }} variant="titleLarge">{route.params.item.showname}</Text>
-        //                 <Text style={{ textAlign: 'center' }} variant="bodyLarge">일시 : {route.params.item.showdate}</Text>
-        //                 <Text style={{ textAlign: 'center' }} variant="bodyLarge">장소 : {route.params.item.place}</Text>
-        //             </Card.Content>
-        //         </Card>
-        //         <Card style={{ height: '40%', justifyContent: 'center' }}>
-        //             <Card.Content>
-        //                 <Text style={styles.textStyle} variant="bodyLarge">장당 가격 {route.params.item.ticketPrice}ETH</Text>
-        //                 <Divider />
-        //                 <Text style={styles.textStyle} variant="bodyLarge">구매 수량 1장</Text>
-        //                 <Divider />
-        //                 <Text style={styles.textStyle} variant="bodyLarge">총 가격 {route.params.item.ticketPrice}ETH</Text>
-        //             </Card.Content>
-        //         </Card>
-        //     </View>
-        //     <View style={{ flex: 2 }}>
-        //         <Button mode="outlined" onPress={onSubmit}>결제하기</Button>
-        //     </View>
-        // </View>
         <View style={styles.container}>
             <View style={{ flex: 1 }}></View>
             <View style={{ flex: 7 }}>
-                <View style={{ flex: 1, margin: 30, padding: 20, borderWidth: 3, borderRadius: 5, borderColor: 'gainsboro' }}>
-                    <View style={{ flex: 7, margin: 10, marginTop: 5, padding: 5 }}>
+                <View style={{ marginHorizontal: 40 }}>
+                    <Text style={{ textAlign: 'center', fontWeight: 'bold' }} variant="titleLarge">{route.params.item.showname}</Text>
+                </View>
+                <View style={{ flex: 1, margin: 40, marginTop: 15, marginBottom: 20, padding: 20, borderWidth: 3, borderRadius: 5, borderColor: 'gainsboro' }}>
+                    <View style={{ flex: 8, margin: 10, marginTop: 0, padding: 5 }}>
                         <Image style={styles.imageStyle} source={require('../../../../src/assets/Ethereum-Logo.png')}></Image>
                     </View>
                     <Divider bold={true} />
-                    <View style={{ flex: 2, margin: 10, marginTop: 15 }}>
-                        <Text style={{ textAlign: 'center', marginBottom: 10 }} variant="titleLarge">{route.params.item.showname}</Text>
-                        <Text style={{ textAlign: 'center' }} variant="bodyLarge">{route.params.item.ticketPrice}ETH</Text>
+                    <View style={{ flex: 2, margin: 5, marginTop: 20, marginBottom: 0, padding: 10, backgroundColor: 'whitesmoke', borderRadius: 3, justifyContent: 'center' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text variant="bodyLarge">가격</Text><Text variant="bodyLarge">{route.params.item.ticketPrice} ETH</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text variant="bodyLarge">좌석</Text><Text variant="bodyLarge">A3 석</Text>
+                        </View>
                     </View>
                 </View>
             </View>
-            <View style={{ flex: 2, marginHorizontal: 30 }}>
+            <View style={{ flex: 2, marginHorizontal: 40 }}>
                 <Button mode="outlined" onPress={onSubmit}>결제하기</Button>
             </View>
         </View>
@@ -102,11 +85,7 @@ const PaymentPage = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //alignItems: 'center',
-        //justifyContent: 'center',
-        // margin: 20,
-        // padding: 20,
-        // textAlign: 'center'
+        //alignItems: 'center',// 양옆 margin이 자동으로 주어지는건가?
         backgroundColor: '#fff'
     },
     imageStyle: {
