@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
-import { Card, Text } from 'react-native-paper';
+import { StyleSheet, View, FlatList, Image, TouchableOpacity } from 'react-native';
+import { Card, Text, Badge } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Axios from 'axios';
@@ -39,39 +39,44 @@ const MyApply = () => {
         load();
     }, []);
 
-    // let applyView = (applyList.length > 0 ? applyList.map((item, index) => {
-    //     return (
-    //         <Card mode='outlined' style={styles.box} key={index} onPress={() => navigation.navigate('ShowApplyResult', { item: item })}>
-    //             <Card.Content style={{ margin: 10 }}>
-    //                 <Text variant="titleLarge">{item.showname}</Text>
-    //                 {/* <Text />
-    //                 <View style={{ flexDirection: 'row' }}>
-    //                     <Text variant="bodyLarge">{item.showtime}</Text>
-    //                     <Text variant="bodyLarge" style={{ flex: 1, textAlign: 'right' }}>{item.ticketPrice} ETH</Text>
-    //                 </View> */}
-    //             </Card.Content>
-    //         </Card>
-    //     );
-    // }) : <View style={styles.container}><Text>응모 내역이 없습니다.</Text></View>)
-
     let applyView = (applyList.length > 0 ? <FlatList data={applyList} renderItem={(itemData) => {
         return (
-            <Card mode='outlined' style={styles.box} onPress={() => navigation.navigate('ShowApplyResult', { item: itemData.item })}>
-                <Card.Content style={{ margin: 10 }}>
-                    <Text variant="titleLarge">{itemData.item.showname}</Text>
-                    {/* <Text />
+            // <Card mode='outlined' style={styles.box} onPress={() => navigation.navigate('ShowApplyResult', { item: itemData.item })}>
+            //     <Card.Content style={{ margin: 10 }}>
+            //         <Text variant="titleLarge">{itemData.item.showname}</Text>
+            //         {/* <Text />
+            //         <View style={{ flexDirection: 'row' }}>
+            //             <Text variant="bodyLarge">{itemData.item.showtime}</Text>
+            //             <Text variant="bodyLarge" style={{ flex: 1, textAlign: 'right' }}>{itemData.item.ticketPrice} ETH</Text>
+            //         </View> */}
+            //     </Card.Content>
+            // </Card>
+
+            <TouchableOpacity onPress={() => navigation.navigate('ShowApplyResult', { item: itemData.item })}>
+                <View style={{ padding: 10, margin: 10, borderRadius: 10, backgroundColor: 'white' }}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text variant="bodyLarge">{itemData.item.showtime}</Text>
-                        <Text variant="bodyLarge" style={{ flex: 1, textAlign: 'right' }}>{itemData.item.ticketPrice} ETH</Text>
-                    </View> */}
-                </Card.Content>
-            </Card>
+                        <View>
+                            <Image style={{ height: 70, width: 70 }} source={{ uri: `data:image/jpg;base64,${itemData.item.imgEncode}` }} />
+                        </View>
+                        <View style={{ flex: 1, margin: 10, marginBottom: 0 }}>
+                            <View style={{ flex: 3 }}>
+                                <Text />
+                            </View>
+                            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                                <Text variant="bodyMedium">{itemData.item.showdate}</Text><Text variant="bodyMedium"> / A3</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <Badge style={{ position: 'absolute', right: 10, top: 10, borderRadius: 3, paddingHorizontal: 5, backgroundColor: 'lightsteelblue' }}>추첨완료</Badge>
+                    <Text style={{ marginTop: 5 }} numberOfLines={1} variant="titleMedium">{itemData.item.showname}</Text>
+                </View>
+            </TouchableOpacity>
         );
     }} />
         : <View style={styles.container}><Text>응모 내역이 없습니다.</Text></View>)
 
     return (
-        <View style={{ flex: 1, marginHorizontal: 25 }}>
+        <View style={{ flex: 1, margin: 10 }}>
             {loading ? <Loading /> : <View style={{ flex: 1 }}>
                 {applyView}
             </View>}
