@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import LoginStackNavigator from './LoginStackNavigator';
 import MainStackNavigator from './MainStackNavigator';
-import InitialPage from './InitialPage';
+import InitialPage from '../pages/InitialPage';
 
 const Stack = createNativeStackNavigator();
 

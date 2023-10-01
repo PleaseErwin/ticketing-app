@@ -67,7 +67,7 @@ const MainNavigator = () => {
           tabBarLabel: '홈',
           unmountOnBlur: true,
           tabBarIcon: ({ focused, color, size }) => {
-            return ( focused ? <Icon name="home" size={size} color={color} /> : <Icon name="home-outline" size={size} color={color} />);
+            return (focused ? <Icon name="home" size={size} color={color} /> : <Icon name="home-outline" size={size} color={color} />);
           },
         }}
       />
@@ -78,7 +78,7 @@ const MainNavigator = () => {
           tabBarLabel: '예매',
           unmountOnBlur: true,
           tabBarIcon: ({ focused, color, size }) => {
-            return ( focused ? <Icon name="ticket" size={size} color={color} /> : <Icon name="ticket-outline" size={size} color={color} />);
+            return (focused ? <Icon name="ticket" size={size} color={color} /> : <Icon name="ticket-outline" size={size} color={color} />);
           },
         }}
       />
@@ -89,7 +89,7 @@ const MainNavigator = () => {
           tabBarLabel: '거래',
           unmountOnBlur: true,
           tabBarIcon: ({ focused, color, size }) => {
-            return ( focused ? <Icon name="handshake" size={size} color={color} /> : <Icon name="handshake-outline" size={size} color={color} />);
+            return (focused ? <Icon name="handshake" size={size} color={color} /> : <Icon name="handshake-outline" size={size} color={color} />);
           },
         }}
       />
@@ -100,7 +100,7 @@ const MainNavigator = () => {
           tabBarLabel: '더보기',
           unmountOnBlur: true,
           tabBarIcon: ({ focused, color, size }) => {
-            return ( focused ? <Icon name="account-settings" size={size} color={color} /> : <Icon name="account-settings-outline" size={size} color={color} />);
+            return (focused ? <Icon name="account-settings" size={size} color={color} /> : <Icon name="account-settings-outline" size={size} color={color} />);
           },
         }}
       />
