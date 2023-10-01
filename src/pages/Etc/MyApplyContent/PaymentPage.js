@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Keyboard, Image } from 'react-native';
+import { StyleSheet, View, Keyboard, Image, Alert } from 'react-native';
 import { Text, Button, Divider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Axios from 'axios';
@@ -76,7 +76,19 @@ const PaymentPage = ({ route }) => {
                 </View>
             </View>
             <View style={{ flex: 2, marginHorizontal: 40 }}>
-                <Button mode="outlined" onPress={onSubmit}>결제하기</Button>
+                <Button buttonColor='grey' textColor='white' mode="elevated" onPress={() => Alert.alert(
+                    '알림',
+                    '결제하시겠습니까?',
+                    [
+                        {
+                            text: '아니오',
+                            onPress: () => console.log('Cancel Button Pressed'),
+                            style: 'cancel',
+                        },
+                        { text: '예', onPress: () => onSubmit },
+                    ],
+                    { cancelable: true },
+                )}>결제하기</Button>
             </View>
         </View>
     );
