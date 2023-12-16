@@ -7,7 +7,6 @@ import Loading from '../../components/Loading';
 
 const TicketingPage = () => {
     const navigation = useNavigation();
-    //const isFocused = useIsFocused();// goback이나 pop함수를 직접 쓴게 아닌데 적용될까? > 왜 다른페이지에서도 계속 로딩하지?
 
     const [searchQuery, setSearchQuery] = React.useState('');
     const onChangeSearch = query => setSearchQuery(query);
@@ -71,12 +70,12 @@ const TicketingPage = () => {
 
     const mounted = React.useRef(false);
 
-    React.useEffect(() => {// 처음 mount될때 실행됨 / 안에서 onKeywordSubmit를 부를수는 없나?
-        if (!mounted.current) {// 해당 페이지 내에서 새로고침하면 mount된 상태 그대로라 실행되는데 이것도 추가로 수정?
+    React.useEffect(() => {
+        if (!mounted.current) {
             mounted.current = true;
         }
         else {
-            console.log(searchQuery);// 계속 검색어가 바뀔때마다 render되면 부담되지 않을까?
+            console.log(searchQuery);
 
             const variables = {
                 keyword: searchQuery,

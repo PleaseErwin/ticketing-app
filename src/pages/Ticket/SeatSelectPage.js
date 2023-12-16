@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, Keyboard, FlatList, Alert } from 'react-native';
-import { Text, Button, IconButton } from 'react-native-paper';
+import { Text, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios';
@@ -17,7 +17,7 @@ const SeatSelectPage = ({ route }) => {
     const [selectedSeats, setSelectedSeats] = React.useState([]);// 선택한 좌석
     const [selectedCount, setSelectedCount] = React.useState(0);// 선택한 좌석 개수
 
-    React.useEffect(() => {// 처음 정보 받아오기
+    React.useEffect(() => {
         const load = async () => {
             try {
                 const variables = {
@@ -76,47 +76,11 @@ const SeatSelectPage = ({ route }) => {
                 )
                 navigation.replace('MainNavigator');
 
-                // Axios.post('http://3.37.125.95:3000/payTicket', variables)
-                //     .then(response => {
-                //         if (response.data.success) {
-                //             alert('예매 성공');
-                //             navigation.replace('MainNavigator');
-                //         } else {
-                //             alert('예매 실패');
-                //         }
-                //     })
             } catch (error) {
                 console.log(error);
             }
         }
         load();
-
-        // const load = async () => {
-        //     try {
-        //         wallet = await AsyncStorage.getItem('wallet_address');
-        //         userid = await AsyncStorage.getItem('user_id');
-
-        //         const variables = {
-        //             // showId: route.params.ticket.showid,
-        //             // userId: userid,
-        //             // ticketOwner: wallet,
-        //             // numberOfSeats: selectedCount
-        //         }
-
-        //         Axios.post('http://3.37.125.95:3000/payTicket', variables)
-        //             .then(response => {
-        //                 if (response.data.success) {
-        //                     alert('예매 성공');
-        //                     navigation.replace('MainNavigator');
-        //                 } else {
-        //                     alert('예매 실패');
-        //                 }
-        //             })
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // }
-        // load();
     }
 
     let seatsList = (<FlatList numColumns={8} style={{ flex: 1 }}
@@ -156,7 +120,7 @@ const SeatSelectPage = ({ route }) => {
                     {seats}
                 </View>
                 <Text style={{ textAlign: 'right', marginRight: 10 }} variant="titleMedium">{route.params.ticket.ticketPrice * selectedCount} ETH</Text>
-            </View>{/* 그러고보니 좌석별로 가격이 다른 경우에는? */}
+            </View>
 
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderTopWidth: 1, borderColor: 'lightgray' }}>
                 {
@@ -183,14 +147,11 @@ const SeatSelectPage = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //alignContent: 'center',
-        backgroundColor: '#fff'// 없을때 색상 'gainsboro'
+        backgroundColor: '#fff'
     },
     imageStyle: {
         width: "100%",
         height: "100%",
-        //alignItems: "center",
-        //justifyContent: "center"
     }
 });
 

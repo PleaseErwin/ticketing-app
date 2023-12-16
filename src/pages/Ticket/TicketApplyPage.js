@@ -77,8 +77,6 @@ const TicketApplyPage = ({ route }) => {
           <Divider />
           <Text />
 
-          {/* 제목은 스크롤하지 않을 경우 <ScrollView showsVerticalScrollIndicator={false}> */}
-
           <Text style={{ fontWeight: 'bold' }} variant="titleMedium">공연정보</Text>
           <View style={{ backgroundColor: 'whitesmoke', marginTop: 10, marginBottom: 20, padding: 15, borderRadius: 7 }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -125,14 +123,9 @@ const TicketApplyPage = ({ route }) => {
             <Text style={{ marginBottom: 3 }}>관람일 당일 · 환불 불가</Text>
           </View>
 
-          {/* </ScrollView> */}
-
         </ScrollView>
       </View>
 
-      {/* <View style={{ flex: 1, marginLeft: 30 }}>
-        <Text style={{ textAlign: 'right', marginRight: 25 }} variant="titleLarge">{route.params.ticket.ticketPrice} ETH</Text>
-      </View> */}
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderTopWidth: 1, borderColor: 'lightgray' }}>
         {
           (applyState === 111 ? <Button disabled mode="contained-tonal" style={{ width: '90%' }}>신청 기간이 아닙니다.</Button>
@@ -148,14 +141,11 @@ const TicketApplyPage = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //alignContent: 'center',
-    backgroundColor: '#fff'// 없을때 색상 'gainsboro'
+    backgroundColor: '#fff'
   },
   imageStyle: {
     width: "100%",
     height: "100%",
-    //alignItems: "center",
-    //justifyContent: "center"
   }
 });
 
