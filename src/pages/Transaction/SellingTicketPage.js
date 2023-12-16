@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, View, Image, FlatList, TouchableOpacity } from 'react-native';
-import { Text, Card, IconButton } from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { Text, IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios';
 import Loading from '../../components/Loading';
@@ -44,49 +43,6 @@ const SellingTicketPage = ({ route }) => {
 
     let ticketView = (ticketList.length > 0 ? <FlatList data={ticketList} renderItem={(itemData) => {
         return (
-            // <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            //     <View
-            //         style={{
-            //             width: 340,
-            //             height: 120,
-            //             backgroundColor: "pink",
-            //             borderRadius: 8,
-
-            //             borderBottomWidth: 2,
-            //             margin: 20,
-            //             borderColor: 'gainsboro'
-            //         }}>
-            //         <View
-            //             style={{
-            //                 position: "absolute",
-            //                 width: 40,
-            //                 height: 40,
-            //                 borderRadius: 20,
-            //                 left: -20,
-            //                 top: 40,
-            //                 backgroundColor: "white",
-
-            //                 borderRightWidth: 2,
-            //                 borderColor: 'gainsboro'
-            //             }}
-            //         />
-            //         <View
-            //             style={{
-            //                 position: "absolute",
-            //                 right: -20,
-            //                 width: 40,
-            //                 height: 40,
-            //                 borderRadius: 20,
-            //                 top: 40,
-            //                 backgroundColor: "white",
-
-            //                 borderLeftWidth: 2,
-            //                 borderColor: 'gainsboro'
-            //             }}
-            //         />
-            //     </View>
-            // </View>
-
             <TouchableOpacity onPress={() => navigation.navigate('TicketBuyPage', { ticket: itemData.item })}>
                 <View style={{ flex: 1, alignItems: "center", justifyContent: "center", margin: 20, marginBottom: 0 }}>
                     <View
@@ -97,7 +53,6 @@ const SellingTicketPage = ({ route }) => {
                         }}>
 
                         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                            {/* <Text variant="titleLarge">{itemData.item.numberOfSeats}매</Text> */}
                         </View>
                         <View style={{ flex: 3, backgroundColor: 'mediumaquamarine', borderRadius: 8 }}>
                             <View style={{ margin: 20, marginTop: 17, marginLeft: 30 }}>
@@ -153,7 +108,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        //backgroundColor: '#fff'
     },
     imageStyle: {
         width: "100%",

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { View, StyleSheet, Keyboard, TouchableOpacity, ActivityIndicator, FlatList, SafeAreaView, Image } from 'react-native';
-import { Searchbar, Card, Text, Badge, IconButton } from 'react-native-paper';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { View, StyleSheet, Keyboard, TouchableOpacity, FlatList } from 'react-native';
+import { Searchbar, Card, Text, IconButton } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios';
 import Loading from '../../components/Loading';
 
@@ -54,7 +54,7 @@ const TransactionPage = () => {
             })
     }
 
-    const mounted = React.useRef(false);// 검색어 업데이트 될 때만 실행하려고 추가
+    const mounted = React.useRef(false);// 검색어가 업데이트 될 때만 실행
 
     React.useEffect(() => {
         if (!mounted.current) {
@@ -80,24 +80,6 @@ const TransactionPage = () => {
 
     let showView = (showList.length > 0 ? <FlatList data={showList} renderItem={(itemData) => {
         return (
-            // <TouchableOpacity onPress={() => navigation.navigate('SellingTicketPage', { show: itemData.item })}>
-            //     <View style={{ flexDirection: 'row', marginHorizontal: 20, marginVertical: 10 }}>
-            //         <View>
-            //             <Image style={{ height: 100, width: 100 }} source={{ uri: `data:image/jpg;base64,${itemData.item.imgEncode}` }} />
-            //         </View>
-            //         <View style={{ margin: 10, flex: 1 }}>
-            //             <View style={{ flex: 1 }}>
-            //                 <Text numberOfLines={1} variant="titleMedium">{itemData.item.showname}</Text>
-            //                 <Text />
-            //             </View>
-            //             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-            //                 <Text variant="bodyMedium">{itemData.item.showdate}</Text>
-            //                 <Text variant="bodyLarge">{itemData.item.showtime.substring(0, 5)}</Text>
-            //             </View>
-            //         </View>
-            //     </View>
-            //     <Divider horizontalInset="true" />
-            // </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('SellingTicketPage', { show: itemData.item })}>
                 <View style={{ margin: 20, marginHorizontal: 25 }}>
                     <Card>
@@ -137,13 +119,6 @@ const TransactionPage = () => {
                     style={{ margin: 20 }}
                     onIconPress={onKeywordSubmit}
                 />
-                {/* <View>
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ padding: 5, marginBottom: 10, marginHorizontal: 20 }}>
-                        <Button mode="contained" children="tour" style={{ marginHorizontal: 5, borderRadius: 20 }} onPress={() => onButtonSubmit('tour')} />
-                        <Button mode="contained" children="2023" style={{ marginHorizontal: 5, borderRadius: 20 }} onPress={() => onButtonSubmit('2023')} />
-                        <Button mode="contained" children="팬미팅" style={{ marginHorizontal: 5, borderRadius: 20 }} onPress={() => onButtonSubmit('팬미팅')} />
-                    </ScrollView>
-                </View> */}
                 {showView}
             </View>}
         </View>

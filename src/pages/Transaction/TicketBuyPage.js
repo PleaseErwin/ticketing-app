@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View, Image, Keyboard, Alert } from 'react-native';
-import { Divider, Text, Button, Card } from 'react-native-paper';
+import { Text, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation, CommonActions } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios';
 import Dash from 'react-native-dash-2';
 
@@ -10,10 +10,7 @@ const TicketBuyPage = ({ route }) => {
 	const navigation = useNavigation();
 
 	const onSubmit = () => {
-		//event.preventDefault();
 		Keyboard.dismiss();
-
-		console.log("구매 버튼 누름");
 
 		const load = async () => {
 			try {
@@ -53,7 +50,6 @@ const TicketBuyPage = ({ route }) => {
 						<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
 							<Text variant="bodyLarge">제목</Text><Text variant="bodyLarge">{route.params.ticket.showname}</Text>
 						</View>
-						{/* <Divider style={{ marginVertical: 10 }} bold={true} /> */}
 						<Dash dashgap={10} dashColor='black' style={{ width: '100%', marginVertical: 15 }} />
 
 						<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -88,14 +84,6 @@ const TicketBuyPage = ({ route }) => {
 							</View>
 						</View>
 
-						{/* <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-							<Text style={{ textAlign: 'center' }} variant="titleMedium">좌석 : </Text>
-							{route.params.ticket.reservedSeat.map((seat, i) => {
-								return (
-									<Text key={i} variant="titleMedium">{seat.seatid} </Text>
-								);
-							})}
-						</View> */}
 					</View>
 				</View>
 
