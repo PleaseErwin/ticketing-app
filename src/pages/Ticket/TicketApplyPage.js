@@ -48,7 +48,7 @@ const TicketApplyPage = ({ route }) => {
           showid: route.params.ticket.showid
         }
 
-        Axios.post('http://3.37.125.95:3000/shows/apply', variables, { headers: { authorization: token } })
+        Axios.post('http://3.37.125.95:3000/users/apply', variables, { headers: { authorization: token } })
           .then(response => {
             if (response.data.success) {
               alert('응모 성공');
@@ -108,11 +108,21 @@ const TicketApplyPage = ({ route }) => {
 
           <Text style={{ fontWeight: 'bold' }} variant="titleMedium">유의사항</Text>
           <View style={{ backgroundColor: 'whitesmoke', marginTop: 10, marginBottom: 20, padding: 15, borderRadius: 7 }}>
-            <Text variant="titleMedium">매수제한</Text>
-            <Text>추첨 신청은 인당 최대 1매까지 가능합니다.</Text>
-            <Text />
-            <Text variant="titleMedium">환불규정</Text>
-            <Text>단순 변심으로 환불 불가합니다.</Text>
+            <Text style={{ marginBottom: 5 }}>- 추첨제 참여 방법 안내</Text>
+            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>     응모하기 {'>'} 당첨확인 {'>'} 결제하기 {'>'} 좌석확인</Text>
+            <Text style={{ marginBottom: 5 }}>- 각 공연에 대해 응모는 한 번만 가능합니다.</Text>
+            <Text style={{ marginBottom: 5 }}>- 각 공연 당 1매 예매가 가능합니다.</Text>
+            <Text style={{ marginBottom: 5 }}>- 당첨자는 정해진 기간 내 결제해야 하며, 미결제 시 당첨이 자동 취소됩니다.</Text>
+            <Text style={{ marginBottom: 5 }}>- 당첨자 미결제 잔여분은 하단의 거래 탭에 등록되어 선착순으로 구매하실 수 있습니다.</Text>
+          </View>
+
+          <Text style={{ fontWeight: 'bold' }} variant="titleMedium">취소 및 환불 규정</Text>
+          <View style={{ backgroundColor: 'whitesmoke', marginTop: 10, marginBottom: 20, padding: 15, borderRadius: 7 }}>
+            <Text style={{ marginBottom: 10 }}>- 가스비 환불 불가</Text>
+            <Text style={{ marginBottom: 3 }}>관람일 7일 전 · 100% 환불</Text>
+            <Text style={{ marginBottom: 3 }}>관람일 6일 ~ 3일 전 · 80% 환불</Text>
+            <Text style={{ marginBottom: 3 }}>관람일 2일 ~ 1일 전 · 50% 환불</Text>
+            <Text style={{ marginBottom: 3 }}>관람일 당일 · 환불 불가</Text>
           </View>
 
           {/* </ScrollView> */}
