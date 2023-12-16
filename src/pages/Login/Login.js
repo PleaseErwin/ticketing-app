@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, View, Keyboard } from 'react-native';
-import { Text, Button, TextInput } from 'react-native-paper';
+import { StyleSheet, View, Keyboard, TextInput } from 'react-native';
+import { Text, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios';
@@ -31,12 +31,12 @@ const Login = () => {
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data.message);
-                    setForm({});
 
                     const save = async () => {
                         try {
                             await AsyncStorage.setItem('user_id', form.id);
                             await AsyncStorage.setItem('token', response.data.token);
+                            await AsyncStorage.setItem('wallet_address', response.data.wallet);
                             navigation.replace('MainStackNavigator');
                         } catch (error) {
                             console.log(error);
@@ -51,16 +51,20 @@ const Login = () => {
 
     return (
         <View style={styles.container}>
-            <Text variant="titleLarge" style={[styles.content, { textAlign: 'center'}]}>로그인</Text>
+            <View style={styles.title}>
+                <Text variant="titleMedium">로그인</Text>
+            </View>
             <TextInput
-                style={styles.content}
+                style={styles.textInput}
+                placeholder="Id"
                 label="Id"
                 value={form.id}
                 onChangeText={changeText('id')}
             />
             <TextInput
-                theme={{ roundness: 10 }}// 둥글게?
-                style={styles.content}
+                secureTextEntry={true}
+                style={styles.textInput}
+                placeholder="Password"
                 label="Password"
                 value={form.password}
                 onChangeText={changeText('password')}
@@ -80,10 +84,23 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'center',
         justifyContent: 'center',
-        margin: 30
+        backgroundColor: '#fff',
+        paddingHorizontal: 30,
+    },
+    title: {
+        alignItems: 'center',
+        marginBottom: 30
     },
     content: {
-        margin: 10
+        marginVertical: 10
+    },
+    textInput: {
+        borderWidth: 1,
+        height: 40,
+        padding: 10,
+        borderRadius: 4,
+        marginBottom: 10,
+        borderColor: '#cccccc'
     }
 });
 
