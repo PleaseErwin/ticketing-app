@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, Keyboard, TextInput } from 'react-native';
 import { Text, Button } from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios';
 
@@ -17,14 +16,14 @@ const Membership = () => {
         password: '',
         wallet: ''
     });
-    const changeText = (name) => (value) => {
+    const changeText = (name) => (value) => {// 대신 Controller 내부 함수 사용
         setForm({ ...form, [name]: value });
     };
 
-    const [authCode, setAuthCode] = React.useState("");// 입력하는 코드
-    const [sentCode, setSentCode] = React.useState(false);// 코드전송 눌렀는지 여부 > input 생김
-    const [checkCode, setCheckCode] = React.useState(false);// 문자인증여부
-    const [duplicateId, setduplicateId] = React.useState(false);// id중복여부
+    const [authCode, setAuthCode] = React.useState("");// 입력하는 인증코드
+    const [sentCode, setSentCode] = React.useState(false);// 문자 전송 버튼 클릭 여부
+    const [checkCode, setCheckCode] = React.useState(false);// 문자인증 여부
+    const [duplicateId, setduplicateId] = React.useState(false);// id중복 여부
 
     const { control: controlPhone, handleSubmit: handleSubmitPhone, formState: { errors: phoneErrors } } = useForm({
         criteriaMode: "all",
@@ -57,38 +56,14 @@ const Membership = () => {
             .then(response => {
                 if (response.data.success) {
                     alert(response.data.message);
-                    //setCheckCode(response.data.confirmed);
-                    setCheckCode(true);// 테스트
+                    setCheckCode(response.data.confirmed);
                 } else {
                     alert('문자 인증번호 확인 실패');
                 }
             })
     }
 
-    const onRegister = () => {// 최종 회원가입 버튼 이벤트
-        Keyboard.dismiss();
-
-        const variables = {
-            id: form.id,
-            password: form.password,
-            phoneNumber: form.phone,
-            wallet: form.wallet
-        }
-        console.log(variables);
-
-        Axios.post('http://3.37.125.95:3000/users/register', variables)
-            .then(response => {
-                if (response.data.success) {
-                    alert('회원가입 성공');
-                    navigation.pop();
-                } else {
-                    alert('회원가입 실패');
-                }
-            })
-    }
-
     const onPhoneSubmit = (data) => {
-        setSentCode(true);
         console.log("data.phoneNumber ", data.phoneNumber);
         setForm({ ...form, ['phone']: data.phoneNumber });
         
@@ -100,28 +75,15 @@ const Membership = () => {
             .then(response => {
                 if (response.data.success) {
                     alert(response.data.message);
+                    if (response.data.confirmed) {
+                        console.log("전송 성공");
+                        setSentCode(true);
+                    }
                 } else {
                     alert('문자 인증번호 전송 실패');
                 }
             })
     }
-
-    // React.useEffect(() => {/// 처음에 바로 실행 안되게
-    //     const variables = {
-    //         userid: form.id,
-    //     }
-    //     console.log(variables);
-
-    //     Axios.post('http://3.37.125.95:3000/checkID', variables)
-    //         .then(response => {
-    //             if (response.data.success) {
-    //                 alert(response.data.message);
-    //                 setCheckCode(response.data.confirmed)
-    //             } else {
-    //                 alert('id 중복체크 실패');
-    //             }
-    //         })
-    // }, [form.id]);
 
     const onIdSubmit = (data) => {
         Keyboard.dismiss();
@@ -144,42 +106,35 @@ const Membership = () => {
             })
     }
 
-    const onPasswordAndWalletSubmit = (data) => {
+    const onRegister = (data) => {// 최종 회원가입 버튼 이벤트
+        Keyboard.dismiss();
+
         console.log("data.userPassword ", data.userPassword);
         console.log("data.userWallet ", data.userWallet);
 
         setForm({ ...form, ['password']: data.userPassword });
         setForm({ ...form, ['wallet']: data.userWallet });
         
-        onRegister();
+        const variables = {
+            id: form.id,
+            password: data.userPassword,
+            phoneNumber: form.phone,
+            wallet: data.userWallet
+        }
+        console.log(variables);
+
+        Axios.post('http://3.37.125.95:3000/users/register', variables)
+            .then(response => {
+                if (response.data.success) {
+                    alert('회원가입 성공');
+                    navigation.pop();
+                } else {
+                    alert('회원가입 실패');
+                }
+            })
     }
 
     return (
-        // <View style={styles.container}>
-        //     <Text variant="titleLarge" style={[styles.content, { textAlign: 'center'}]}>회원가입</Text>
-        //     <TextInput
-        //         style={styles.content}
-        //         label="Id"
-        //         value={form.id}
-        //         onChangeText={changeText('id')}
-        //     />
-        //     <TextInput
-        //         style={styles.content}
-        //         label="Password"
-        //         value={form.password}
-        //         onChangeText={changeText('password')}
-        //     />
-        //     <TextInput
-        //         style={styles.content}
-        //         label="Email"
-        //         value={form.email}
-        //         onChangeText={changeText('email')}
-        //     />
-        //     <Button style={styles.content} mode="contained-tonal" onPress={onSubmit}>
-        //         회원가입
-        //     </Button>
-        // </View>
-
         <View style={styles.appContainer}>
             <View style={styles.title}>
                 <Text variant="titleMedium">회원가입</Text>
@@ -216,15 +171,6 @@ const Membership = () => {
                         문자 전송
                     </Button>
                 </View>
-                {/* {phoneErrors.phoneNumber ? <View style={styles.checkButton}>
-                    <Button disabled title="Submit" mode="contained-tonal" onPress={handleSubmitPhone(onPhoneSubmit)}>
-                        문자 전송
-                    </Button>
-                </View> : <View style={styles.checkButton}>
-                    <Button title="Submit" mode="contained-tonal" onPress={handleSubmitPhone(onPhoneSubmit)}>
-                        문자 전송
-                    </Button>
-                </View>} */}
             </View>
             <ErrorMessage
                 errors={phoneErrors}
@@ -290,7 +236,6 @@ const Membership = () => {
                     ))
                 }
             />
-            {/* {!(errors.userId) && <Text>성공</Text>} */}
 
             <Text style={styles.label}>비밀번호</Text>
             <Controller
@@ -358,7 +303,7 @@ const Membership = () => {
 
             <View style={styles.button}>
                 {checkCode && duplicateId && !phoneErrors.phoneNumber && !idErrors.userId && !passwordAndWalletErrors.userPassword && !passwordAndWalletErrors.userWallet ?
-                    <Button title="Submit" mode="contained-tonal" onPress={handleSubmitPasswordAndWallet(onPasswordAndWalletSubmit)}>
+                    <Button title="Submit" mode="contained-tonal" onPress={handleSubmitPasswordAndWallet(onRegister)}>
                         회원가입
                     </Button> :
                     <Button disabled title="Submit" mode="contained-tonal">
@@ -395,7 +340,6 @@ const styles = StyleSheet.create({
         color: 'red'
     },
     textInput: {
-        //borderColor: "black",
         borderWidth: 1,
         height: 40,
         padding: 10,
@@ -404,7 +348,6 @@ const styles = StyleSheet.create({
         borderColor: '#cccccc'
     },
     checkTextInput: {
-        //borderColor: "black",
         width: '60%',
         borderWidth: 1,
         height: 40,
