@@ -8,7 +8,8 @@ import ShowInfo from '../pages/Home/ShowInfo';
 
 import TicketingPage from '../pages/Ticket/TicketingPage';
 import TicketApplyPage from '../pages/Ticket/TicketApplyPage';
-import TicketSelectPage from '../pages/Ticket/TicketSelectPage';
+import TicketBookingPage from '../pages/Ticket/TicketBookingPage';
+import SeatSelectPage from '../pages/Ticket/SeatSelectPage';
 import LocationGuide from '../pages/Ticket/LocationGuide';
 
 import TransactionPage from '../pages/Transaction/TransactionPage';
@@ -36,7 +37,8 @@ const MainStackNavigator = () => {
 
             <MainStack.Screen name="TicketingPage" component={TicketingPage} options={{headerShown: false}} />
             <MainStack.Screen name="TicketApplyPage" component={TicketApplyPage} options={{title: '상세 페이지'}}/>
-            <MainStack.Screen name="TicketSelectPage" component={TicketSelectPage} options={{title: '좌석 선택 페이지'}}/>
+            <MainStack.Screen name="TicketBookingPage" component={TicketBookingPage} options={{title: '상세 페이지'}}/>
+            <MainStack.Screen name="SeatSelectPage" component={SeatSelectPage} options={{title: '좌석 선택 페이지'}}/>
             <MainStack.Screen name="LocationGuide" component={LocationGuide} options={{title: ''}}/>
 
             <MainStack.Screen name="TransactionPage" component={TransactionPage} options={{headerShown: false}} />
