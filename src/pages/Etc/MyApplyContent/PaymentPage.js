@@ -8,13 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 const PaymentPage = ({ route }) => {
     const navigation = useNavigation();
 
-    const variables = {
-        showId: route.params.item.showid,
-        hash: 0
-    }
-
     const onSubmit = () => {
-        //event.preventDefault();
         Keyboard.dismiss();
 
         console.log("결제 버튼 누름");
@@ -33,12 +27,9 @@ const PaymentPage = ({ route }) => {
                 Axios.post('http://3.37.125.95:3000/payTicket', variables)
                     .then(response => {
                         if (response.data.success) {
-                            // Alert.alert('결제 성공');
-                            // navigation.replace('MainNavigator');
                             const loadAlert = async () => {
                                 try {
-                                    Alert.alert('결제 성공');// 이거 잘 되나? > 안 됨
-                                    //navigation.replace('MainStackNavigator');
+                                    Alert.alert('결제 성공');
                                 } catch (error) {
                                     console.log(error);
                                 }
@@ -73,9 +64,6 @@ const PaymentPage = ({ route }) => {
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text variant="bodyLarge">가격</Text><Text variant="bodyLarge">{route.params.item.ticketPrice} ETH</Text>
                         </View>
-                        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text variant="bodyLarge">좌석</Text><Text variant="bodyLarge">A3 석</Text>
-                        </View> */}
                     </View>
                 </View>
             </View>
@@ -101,7 +89,6 @@ const PaymentPage = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //alignItems: 'center',// 양옆 margin이 자동으로 주어지는건가?
         backgroundColor: '#fff'
     },
     imageStyle: {

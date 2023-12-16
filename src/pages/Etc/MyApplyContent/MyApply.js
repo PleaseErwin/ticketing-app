@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, View, FlatList, Image, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, FlatList, Image, Alert } from 'react-native';
 import { Card, Text, Badge } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Axios from 'axios';
 import Loading from '../../../components/Loading';
-import moment from 'moment';
 
 const MyApply = () => {
     const navigation = useNavigation();
@@ -38,31 +37,6 @@ const MyApply = () => {
         }
         load();
     }, []);
-
-    // // <TouchableOpacity onPress={() => navigation.navigate('ShowApplyResult', { item: itemData.item })}>
-    // //     <View style={{ padding: 10, margin: 10, borderRadius: 10, backgroundColor: 'white', borderBottomWidth: 3, borderColor: 'gainsboro' }}>
-    // <Card contentStyle={{ backgroundColor: 'white', padding: 15, paddingBottom: 12, elevation: 3 }} mode='elevated' style={styles.box} onPress={() => navigation.navigate('ShowApplyResult', { item: itemData.item })}>
-    //     {/* <Card.Content style={{ backgroundColor: 'white', padding: 0 }}> */}
-    //     <View style={{ flexDirection: 'row' }}>
-    //         <View>
-    //             <Image style={{ height: 70, width: 70 }} source={{ uri: `data:image/jpg;base64,${itemData.item.imgEncode}` }} />
-    //         </View>
-    //         <View style={{ flex: 1, marginLeft: 13, marginBottom: 3 }}>
-    //             <View style={{ flex: 3 }}>
-    //                 <Text />
-    //             </View>
-    //             <View style={{ flex: 1 }}>
-    //                 <Text variant="bodyMedium">당첨자 발표 - {itemData.item.paystart.substring(0, 10)}</Text>
-    //             </View>
-    //         </View>
-    //     </View>
-    //     <Badge style={{ position: 'absolute', right: 15, top: 15, borderRadius: 3, paddingHorizontal: 5, backgroundColor: 'lightsteelblue' }}>추첨완료</Badge>
-    //     <Badge style={{ position: 'absolute', right: 15, top: 15, borderRadius: 3, paddingHorizontal: 5, backgroundColor: 'crimson' }}>추첨전</Badge>
-    //     <Text style={{ marginTop: 5 }} numberOfLines={1} variant="titleMedium">{itemData.item.showname}</Text>
-    //     {/* </Card.Content> */}
-    // </Card>
-    // //     </View>
-    // // </TouchableOpacity>
 
     const moment = require("moment");
     const today = moment();
@@ -132,7 +106,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     box: {
-        //alignContent: 'center',
         marginBottom: 15
     }
 });
