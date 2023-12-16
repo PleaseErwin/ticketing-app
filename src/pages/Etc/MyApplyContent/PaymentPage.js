@@ -13,8 +13,8 @@ const PaymentPage = ({ route }) => {
         hash: 0
     }
 
-    const onSubmit = (event) => {
-        event.preventDefault();
+    const onSubmit = () => {
+        //event.preventDefault();
         Keyboard.dismiss();
 
         console.log("결제 버튼 누름");
@@ -22,27 +22,31 @@ const PaymentPage = ({ route }) => {
         const load = async () => {
             try {
                 wallet = await AsyncStorage.getItem('wallet_address');
+                userid = await AsyncStorage.getItem('user_id');
 
                 const variables = {
                     showId: route.params.item.showid,
-                    ticketOwner: wallet
+                    userId: userid,
+                    ticketOwner: wallet,
+                    numberOfSeats: 1
                 }
                 Axios.post('http://3.37.125.95:3000/payTicket', variables)
                     .then(response => {
                         if (response.data.success) {
-                            alert('결제 성공');
+                            // Alert.alert('결제 성공');
+                            // navigation.replace('MainNavigator');
+                            const loadAlert = async () => {
+                                try {
+                                    Alert.alert('결제 성공');// 이거 잘 되나? > 안 됨
+                                    //navigation.replace('MainStackNavigator');
+                                } catch (error) {
+                                    console.log(error);
+                                }
+                            }
+                            loadAlert();
                             navigation.replace('MainNavigator');
-                            // const save = async () => {// 해시값 저장
-                            //     try {
-                            //         await AsyncStorage.setItem('hash', response.data.hash);
-                            //         navigation.replace('MainStackNavigator');
-                            //     } catch (error) {
-                            //         console.log(error);
-                            //     }
-                            // }
-                            // save();
                         } else {
-                            alert('결제 실패');
+                            Alert.alert('결제 실패');
                         }
                     })
 
@@ -69,9 +73,9 @@ const PaymentPage = ({ route }) => {
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text variant="bodyLarge">가격</Text><Text variant="bodyLarge">{route.params.item.ticketPrice} ETH</Text>
                         </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text variant="bodyLarge">좌석</Text><Text variant="bodyLarge">A3 석</Text>
-                        </View>
+                        </View> */}
                     </View>
                 </View>
             </View>
@@ -85,7 +89,7 @@ const PaymentPage = ({ route }) => {
                             onPress: () => console.log('Cancel Button Pressed'),
                             style: 'cancel',
                         },
-                        { text: '예', onPress: () => onSubmit },
+                        { text: '예', onPress: onSubmit },
                     ],
                     { cancelable: true },
                 )}>결제하기</Button>
