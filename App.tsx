@@ -1,8 +1,7 @@
 import React from 'react';
 import { DefaultTheme, PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
-
-import StackNavigator from './src/components/StackNavigator';
+import StackNavigator from './src/navigators/StackNavigator';
 
 const theme = {
   ...DefaultTheme,
@@ -10,6 +9,7 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     //primaryContainer: 'white'
+    //secondaryContainer: "red",
     //primary: '#034748',
     //accent: '#11B5E4',
     background: 'white',
@@ -24,11 +24,11 @@ const theme = {
 
 function App() {
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <StackNavigator />
-      </NavigationContainer>
-    </PaperProvider>
+      <PaperProvider theme={theme}>
+        <NavigationContainer>
+          <StackNavigator />
+        </NavigationContainer>
+      </PaperProvider>
   )
 }
 
